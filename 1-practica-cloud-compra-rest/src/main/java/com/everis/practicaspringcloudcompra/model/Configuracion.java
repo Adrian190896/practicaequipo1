@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 	
 @Component
-@ConfigurationProperties("config")
+@ConfigurationProperties("config") //coment
 public class Configuracion {
 	private long reorden;
 
