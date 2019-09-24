@@ -1,10 +1,10 @@
 insert into inventario(id,nombre,stock) 
-values(001,'Samsung s10',19);
+values(1,'Samsung s10',19);
 insert into inventario(id,nombre,stock) 
-values(002,'iPhone 11',15);
+values(2,'iPhone 11',15);
 insert into inventario(id,nombre,stock) 
-values(003,'Nokia',5);
+values(3,'Nokia',5);
 insert into inventario(id,nombre,stock) 
-values(004,'Xaomi',8);
+values(4,'Xaomi',8);
 insert into inventario(id,nombre,stock) 
-values(005,'Huawei',12);
+values(5,'Huawei',12);

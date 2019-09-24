@@ -14,13 +14,13 @@ import com.everis.practicaspringcloudcompra.responses.CurrencyCompraResponse;
 @RestController
 public class CurrencyCompraController {
 	
-	@GetMapping("/currency-compra/idProducto/{idProducto}/cantidad/{cantidad}")
+	@GetMapping("/compra/idProducto/{idProducto}/cantidad/{cantidad}")
 	public CurrencyCompraResponse obtenStock(@PathVariable int idProducto, @PathVariable int cantidad) {
 		
-		String url = "http://localhost:8000/currency-inventario/{idProducto}";
+		String url = "http://localhost:8000/inventario/id/{id}";
 		
 		Map<String, Integer> uriVariables = new HashMap<>();
-		uriVariables.put("idProducto", idProducto);
+		uriVariables.put("id", idProducto);
 		
 		CurrencyCompraResponse response = new CurrencyCompraResponse();
 		try {

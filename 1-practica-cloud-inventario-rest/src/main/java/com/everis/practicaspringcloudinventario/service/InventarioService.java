@@ -14,7 +14,7 @@ public class InventarioService {
 	@Autowired
 	private InventarioRepository inventarioRepository;
 	
-	public List<Inventario> listar(){
-		return inventarioRepository.findAll();
+	public Inventario findById(long id){
+		return inventarioRepository.findById(id);
 	}
 }

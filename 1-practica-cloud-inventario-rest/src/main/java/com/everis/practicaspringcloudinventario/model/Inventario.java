@@ -10,11 +10,11 @@ public class Inventario {
 	@Id
 	private long id;
 	
-	@Column
+	@Column(name="nombre")
 	private String nombre;
 	
-	@Column 
-	private String stock;
+	@Column(name="stock")
+	private long stock;
 
 	public long getId() {
 		return id;
@@ -32,11 +32,11 @@ public class Inventario {
 		this.nombre = nombre;
 	}
 
-	public String getStock() {
+	public long getStock() {
 		return stock;
 	}
 
-	public void setStock(String stock) {
+	public void setStock(long stock) {
 		this.stock = stock;
 	}
 	

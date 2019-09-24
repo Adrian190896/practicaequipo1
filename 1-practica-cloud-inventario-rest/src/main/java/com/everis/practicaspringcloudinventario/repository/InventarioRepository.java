@@ -9,4 +9,5 @@ import com.everis.practicaspringcloudinventario.model.Inventario;
 @Repository
 public interface InventarioRepository extends JpaRepository<Inventario, Long>{
 
+	Inventario findById(long id);
 }
