@@ -3,20 +3,21 @@ package com.everis.practicaspringcloudcompra.responses;
 import com.everis.practicaspringcloudcompra.model.Inventario;
 
 public class CurrencyCompraResponse {
-	private boolean succesful;
-	private Inventario producto;
-	public boolean isSuccesful() {
-		return succesful;
+	private boolean successful;
+	private Inventario inventario;
+	public boolean isSuccessful() {
+		return successful;
 	}
-	public void setSuccesful(boolean succesful) {
-		this.succesful = succesful;
+	public void setSuccessful(boolean successful) {
+		this.successful = successful;
 	}
-	public Inventario getProducto() {
-		return producto;
+	public Inventario getInventario() {
+		return inventario;
 	}
-	public void setProducto(Inventario producto) {
-		this.producto = producto;
+	public void setInventario(Inventario inventario) {
+		this.inventario = inventario;
 	}
+	
 	
 	
 }
