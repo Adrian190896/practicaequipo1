@@ -32,15 +32,20 @@ public class CurrencyCompraController {
 			ResponseEntity<CurrencyCompraResponse> respuesta = new RestTemplate().getForEntity(url, CurrencyCompraResponse.class, uriVariables);
 			response = respuesta.getBody();
 			if(cantidad<response.getInventario().getStock()) {
-				if((response.getInventario().getStock()-cantidad)<(response.getInventario().getStock()*(configuracion.getReorden()/100))) {
-					response.setSuccessful(false);
+				double minimo = response.getInventario().getStock()*configuracion.getReorden()/100;
+				double remanente = response.getInventario().getStock()-cantidad; 
+				if(remanente>minimo) {
+					response.setSuccessful(true);
+					response.setMessage("Compra verificada");
 				}
 				else {
-					response.setSuccessful(true);
+					response.setSuccessful(false);
+					response.setMessage("No es posible comprar, la cantidad entra en conflicto con reorden");
 				}
 			}
 			else {
 				response.setSuccessful(false);
+				response.setMessage("No es posible comprar, stock insuficiente");
 			}
 			
 		}
