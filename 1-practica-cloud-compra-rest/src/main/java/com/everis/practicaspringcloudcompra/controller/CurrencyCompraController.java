@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.everis.practicaspringcloudcompra.model.Configuracion;
+import com.everis.practicaspringcloudcompra.proxy.CurrencyInventarioServiceProxy;
 import com.everis.practicaspringcloudcompra.responses.CurrencyCompraResponse;
 
 @RestController
 public class CurrencyCompraController {
+	
+	@Autowired
+	private CurrencyInventarioServiceProxy currencyInventarioServiceProxy;
 	
 	@Autowired
 	private Configuracion configuracion;
@@ -22,15 +26,16 @@ public class CurrencyCompraController {
 	@GetMapping("/compra/idProducto/{idProducto}/cantidad/{cantidad}")
 	public CurrencyCompraResponse obtenStock(@PathVariable int idProducto, @PathVariable int cantidad) {
 		
-		String url = "http://localhost:8000/inventario/id/{id}";
-		
-		Map<String, Integer> uriVariables = new HashMap<>();
-		uriVariables.put("id", idProducto);
+//		String url = "http://localhost:8000/inventario/id/{id}";
+//		
+//		Map<String, Integer> uriVariables = new HashMap<>();
+//		uriVariables.put("id", idProducto);
 		
 		CurrencyCompraResponse response = new CurrencyCompraResponse();
 		try {
-			ResponseEntity<CurrencyCompraResponse> respuesta = new RestTemplate().getForEntity(url, CurrencyCompraResponse.class, uriVariables);
-			response = respuesta.getBody();
+//			ResponseEntity<CurrencyCompraResponse> respuesta = new RestTemplate().getForEntity(url, CurrencyCompraResponse.class, uriVariables);
+//			response = respuesta.getBody();
+			response = currencyInventarioServiceProxy.consultaCompra(idProducto, cantidad);
 			if(cantidad<response.getInventario().getStock()) {
 				double minimo = response.getInventario().getStock()*configuracion.getReorden()/100;
 				double remanente = response.getInventario().getStock()-cantidad; 
