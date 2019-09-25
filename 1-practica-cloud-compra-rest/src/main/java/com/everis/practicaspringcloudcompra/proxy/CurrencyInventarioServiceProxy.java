@@ -11,7 +11,7 @@ import com.everis.practicaspringcloudcompra.responses.CurrencyCompraResponse;
 @RibbonClient(name="inventario-service")
 public interface CurrencyInventarioServiceProxy {
 	
-	@GetMapping("/compra/idProducto/{idProducto}/cantidad/{cantidad}")
-	public CurrencyCompraResponse consultaCompra(@PathVariable int idProducto, @PathVariable int cantidad);
+	@GetMapping("/inventario/id/{idProducto}")
+	public CurrencyCompraResponse consultaCompra(@PathVariable int idProducto);
 
 }

@@ -35,7 +35,7 @@ public class CurrencyCompraController {
 		try {
 //			ResponseEntity<CurrencyCompraResponse> respuesta = new RestTemplate().getForEntity(url, CurrencyCompraResponse.class, uriVariables);
 //			response = respuesta.getBody();
-			response = currencyInventarioServiceProxy.consultaCompra(idProducto, cantidad);
+			response = currencyInventarioServiceProxy.consultaCompra(idProducto);
 			
 			if(cantidad<response.getInventario().getStock()) {
 				double minimo = response.getInventario().getStock()*configuracion.getReorden()/100;
