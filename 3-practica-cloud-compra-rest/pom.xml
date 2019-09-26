@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.everis</groupId>
-	<artifactId>2-practica-cloud-compra-rest</artifactId>
+	<artifactId>3-practica-cloud-compra-rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>2-practica-cloud-compra-rest</name>
+	<name>3-practica-cloud-compra-rest</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

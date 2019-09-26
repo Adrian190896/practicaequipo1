@@ -18,13 +18,17 @@ import org.springframework.web.client.RestTemplate;
 import com.everis.practicaspringcloudcompra.model.Compra;
 import com.everis.practicaspringcloudcompra.model.Configuracion;
 import com.everis.practicaspringcloudcompra.model.Inventario;
+import com.everis.practicaspringcloudcompra.model.Mensaje;
 import com.everis.practicaspringcloudcompra.proxy.CurrencyInventarioServiceProxy;
+import com.everis.practicaspringcloudcompra.proxy.WhatsAppProxy;
 import com.everis.practicaspringcloudcompra.responses.CurrencyCompraResponse;
 import com.everis.practicaspringcloudcompra.service.CompraService;
 import com.everis.practicaspringcloudcompra.service.InventarioService;
 
 @RestController
 public class CurrencyCompraController {
+	@Autowired
+	private WhatsAppProxy whatsAppProxy;
 	
 	@Autowired
 	private CurrencyInventarioServiceProxy currencyInventarioServiceProxy;
@@ -80,6 +84,8 @@ public class CurrencyCompraController {
 			else {
 				response.setSuccessful(false);
 				response.setMessage("No es posible comprar, stock insuficiente");
+				Mensaje mensaje = new Mensaje(response.getMessage());
+				whatsAppProxy.enviaMensaje(mensaje);
 			}
 			
 		}
