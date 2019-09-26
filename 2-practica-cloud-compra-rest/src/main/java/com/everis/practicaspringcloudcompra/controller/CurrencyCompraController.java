@@ -39,7 +39,7 @@ public class CurrencyCompraController {
 	private Configuracion configuracion;
 	
 	@GetMapping("/compra/idProducto/{idProducto}/cantidad/{cantidad}")
-	public Compra obtenStock(@PathVariable int idProducto, @PathVariable int cantidad) {
+	public CurrencyCompraResponse obtenStock(@PathVariable int idProducto, @PathVariable int cantidad) {
 		Compra compra = new Compra();
 //		String url = "http://localhost:8000/inventario/id/{id}";
 //		
@@ -47,18 +47,25 @@ public class CurrencyCompraController {
 //		uriVariables.put("id", idProducto);
 		
 		CurrencyCompraResponse response = new CurrencyCompraResponse();
+
 		try {
 //			ResponseEntity<CurrencyCompraResponse> respuesta = new RestTemplate().getForEntity(url, CurrencyCompraResponse.class, uriVariables);
 //			response = respuesta.getBody();
+//			response = currencyInventarioServiceProxy.consultaCompra(idProducto);
+//			Inventario nuevoProducto = response.getInventario();
+		
 			response = currencyInventarioServiceProxy.consultaCompra(idProducto);
 			Inventario nuevoProducto = response.getInventario();
-
 		//	System.out.println("PUERTO:" + response.getInventario().getPort());
 			if(cantidad<response.getInventario().getStock()) {
 				double minimo = response.getInventario().getStock()*configuracion.getReorden()/100;
 				double remanente = response.getInventario().getStock()-cantidad; 
-				boolean insertado = false;
+			
+
+	//			boolean insertado = false;
 				if(remanente>minimo) {
+
+					
 					nuevoProducto.setStock((int)Math.round(remanente));
 					inventarioService.CambioStock(nuevoProducto);
 		//			DateFormat formato = new SimpleDateFormat("DD/MM/YYYY HH:mm:ss");
@@ -68,9 +75,10 @@ public class CurrencyCompraController {
 					response.setMessage("Compra verificada");
 					compra.setCantidad(cantidad);
 					compra.setFechahora(fecha);
-					compra.setInventario(response.getInventario());
-					compraService.insertar(compra);
-				    insertado = true;					
+					//compra.setInventario(response.getInventario());
+					response.setCompra(compra);
+				//	compraService.insertar(compra);
+	//			    insertado = true;					
 				}
 				else {
 					response.setSuccessful(false);
@@ -86,7 +94,7 @@ public class CurrencyCompraController {
 		catch (Exception e){
 			response.setSuccessful(false);
 		}
-		return compra;
+		return response;
 		
 	}
 	

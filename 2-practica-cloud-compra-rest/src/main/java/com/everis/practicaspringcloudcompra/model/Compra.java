@@ -24,6 +24,7 @@ public class Compra implements java.io.Serializable {
 	private Date fechahora;
 	private int cantidad;
 
+
 	public Compra() {
 	}
 
