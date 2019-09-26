@@ -24,5 +24,5 @@ public class CompraService {
 	public Compra insertar(Compra compra) {
 		return compraRepository.save(compra);
 	}
-	
+	//
 }
