@@ -15,8 +15,10 @@ public class CompraService {
 	@Autowired
 	private CompraRepository compraRepository;
 	
-	public List<Compra> listar(){
-		return compraRepository.findAll();
+	public Compra obtenUltima(){
+		List<Compra> listaCompras=compraRepository.findAll();
+		Compra ultimaCompra = listaCompras.get(listaCompras.size()-1);
+		return ultimaCompra;
 	}
 	
 	public Compra insertar(Compra compra) {

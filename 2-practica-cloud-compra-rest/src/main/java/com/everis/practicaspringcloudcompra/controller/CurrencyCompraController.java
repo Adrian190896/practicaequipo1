@@ -47,38 +47,30 @@ public class CurrencyCompraController {
 //		uriVariables.put("id", idProducto);
 		
 		CurrencyCompraResponse response = new CurrencyCompraResponse();
-
 		try {
 //			ResponseEntity<CurrencyCompraResponse> respuesta = new RestTemplate().getForEntity(url, CurrencyCompraResponse.class, uriVariables);
 //			response = respuesta.getBody();
-//			response = currencyInventarioServiceProxy.consultaCompra(idProducto);
-//			Inventario nuevoProducto = response.getInventario();
-		
 			response = currencyInventarioServiceProxy.consultaCompra(idProducto);
 			Inventario nuevoProducto = response.getInventario();
+
 		//	System.out.println("PUERTO:" + response.getInventario().getPort());
 			if(cantidad<response.getInventario().getStock()) {
 				double minimo = response.getInventario().getStock()*configuracion.getReorden()/100;
 				double remanente = response.getInventario().getStock()-cantidad; 
-			
-
-	//			boolean insertado = false;
 				if(remanente>minimo) {
-
-					
 					nuevoProducto.setStock((int)Math.round(remanente));
 					inventarioService.CambioStock(nuevoProducto);
 		//			DateFormat formato = new SimpleDateFormat("DD/MM/YYYY HH:mm:ss");
 					Date fecha = new Date();  
 					response.setSuccessful(true);			
-		//	response.getInventario().setStock((int)Math.round(remanente));
 					response.setMessage("Compra verificada");
 					compra.setCantidad(cantidad);
 					compra.setFechahora(fecha);
-					//compra.setInventario(response.getInventario());
-					response.setCompra(compra);
-				//	compraService.insertar(compra);
-	//			    insertado = true;					
+					compra.setInventario(response.getInventario());
+					compraService.insertar(compra);	
+					compra.setIdcompra(compraService.obtenUltima().getIdcompra());
+					response.setCompra(compra);		
+					
 				}
 				else {
 					response.setSuccessful(false);

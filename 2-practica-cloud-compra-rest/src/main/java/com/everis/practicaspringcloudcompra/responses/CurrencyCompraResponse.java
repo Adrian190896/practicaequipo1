@@ -1,5 +1,7 @@
 package com.everis.practicaspringcloudcompra.responses;
 
+import java.util.Date;
+
 import com.everis.practicaspringcloudcompra.model.Compra;
 import com.everis.practicaspringcloudcompra.model.Inventario;
 
@@ -7,26 +9,7 @@ public class CurrencyCompraResponse {
 	private boolean successful;
 	private Inventario inventario;
 	private String message;
-
-//	
-	
-	
-	
-	
 	private Compra compra;
-	
-	public Compra getCompra() {
-		return compra;
-	}
-	public void setCompra(Compra compra) {
-		this.compra = compra;
-	}
-	
-	
-	
-	
-	
-	
 	
 	public boolean isSuccessful() {
 		return successful;
@@ -46,6 +29,13 @@ public class CurrencyCompraResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	public Compra getCompra() {
+		return compra;
+	}
+	public void setCompra(Compra compra) {
+		this.compra = compra;
+	}
+	
 	
 	
 	
